@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="ts">
+        <div id="tc">
+            <table id="table">
+                <thead>
+                    <tr>
+                        <th onclick="fun('title')">title</th>
+                        <th onclick="fun('isbn')">isbn</th>
+                        <th onclick="fun('pageCount')">pagecount</th>
+                        <th onclick="fun('publishedDate')">published date</th>
+                        <th onclick="fun('thumbnailUrl')">thumbnail url</th>
+                        <th onclick="fun('shortDescription')">shortdescription</th>
+                        <th onclick="fun('longDescription')">longdescription</th>
+                        <th onclick="fun('status')">status</th>
+                        <th onclick="fun('authors')">authors</th>
+                        <th onclick="fun('categories')">categories</th>
+                        <th onclick="fun('price')">price</th>
+                        <th onclick="fun('currency')">currency</th>
+                        <th onclick="fun('discount')">discount</th>
+                        <th onclick="fun('discountUnit')">discountunit</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+            </table>
+        </div>
+        <div id="bs">
+            <button onclick="next()">next</button>
+            <BUtton onclick="previous()">previous</BUtton>
+        </div>
+    </div>
+</body>
+<script type="module">
+    import { s } from './data.js';
+    var tabledata = []
+    var i = 1
+    var j = 10
+    function createtable() {
+        // tabledata=s.slice(i,j)
+        // console.log(tabledata)
+        let start = (i - 1) * j;
+        let end = i + j
+        let tabledata = s.slice(start, end);
+        tabledata.forEach(function (data) {
+            console.log(data)
+            let row = document.createElement("tr")
+            let title = document.createElement("td")
+            let isbn = document.createElement("td")
+            let pagecount = document.createElement("td")
+            let publisheddate = document.createElement("td")
+            let thumbnailurl = document.createElement("td")
+            let shortdescription = document.createElement("td")
+            let longdescription = document.createElement("td")
+            let status = document.createElement("td")
+            let authors = document.createElement("td")
+            let categories = document.createElement("td")
+            let price = document.createElement("td")
+            let currency = document.createElement("td")
+            let discount = document.createElement("td")
+            let discountunit = document.createElement("td")
+            title.append(data.title)
+            isbn.append(data.isbn)
+            pagecount.append(data.pageCount)
+            publisheddate.append(data.publishedDate?.$date || "")
+            thumbnailurl.append(data.thumbnailUrl)
+            shortdescription.append(data.shortDescription)
+            longdescription.append(data.longDescription)
+            status.append(data.status)
+            authors.append(data.authors)
+            categories.append(data.categories)
+            price.append(data.price)
+            currency.append(data.currency)
+            discount.append(data.discount)
+            discountunit.append(data.discountUnits || "")
+            row.appendChild(title)
+            row.appendChild(isbn)
+            row.appendChild(pagecount)
+            row.appendChild(publisheddate)
+            row.appendChild(thumbnailurl)
+            row.appendChild(shortdescription)
+            row.appendChild(longdescription)
+            row.appendChild(status)
+            row.appendChild(authors)
+            row.appendChild(categories)
+            row.appendChild(price)
+            row.appendChild(currency)
+            row.appendChild(discount)
+            row.appendChild(discountunit)
+            document.getElementById("tbody").appendChild(row)
+            // i=i+10
+            // j=j+10
+        })
+    }
+    createtable()
+    function next() {
+        let table = document.getElementById("table");
+        table.innerHTML = " "
+        if (i< Math.ceil(s.length / j)) {
+            i++;
+            createtable();
+        }
+        createtable()
+    }
+    function previous() {
+        let table = document.getElementById("table");
+        table.innerHTML = " "
+
+        if (i > 1) {
+            i--;
+            createtable();
+        }
+    }
+    function fun(value) {
+        let table = document.getElementById("table");
+        table.innerHTML = " "
+        tabledata.sort(function (a, b) {
+            let c=a[value]
+            let d=b[value]
+            if (c>d) {
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        });
+        sa()
+    }
+
+
+</script>
+
+</html>

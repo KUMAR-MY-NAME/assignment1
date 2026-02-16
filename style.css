@@ -1,0 +1,41 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+#ts{
+    height: 100vh;              
+    display: flex;
+    flex-direction: column;
+}
+#tc {
+    flex: 8;                     
+    overflow: auto;           
+}
+#bs {
+    flex: 2;                     
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: #f2f2f2;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td ,tr{
+    border: 1px solid black;
+    padding: 5px;
+    text-align: left;
+}
+thead {
+    position: sticky;
+    top: 0;
+    background: white;
+}
+button{
+    background-color: blue;
+    color: white;
+}
+
